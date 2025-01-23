@@ -1,5 +1,5 @@
 import pandas as pd
-import ast, json
+import os, ast, json
 
 def iterate_llm_response(funct, debug_response, num=10, *params):
     """
@@ -122,7 +122,9 @@ def compare_laptops_with_user(user_req_string):
     - str: A JSON string containing information about the top 3 matching laptops based on user requirements.
     """
     
-    user_laptop_df = pd.read_csv('../data/updated_laptop.csv')
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    file_path = os.path.join(script_dir, "data/updated_laptop.csv")
+    user_laptop_df = pd.read_csv(file_path)
     
     # Format price column
     user_laptop_df['Price']=user_laptop_df['Price'].str.replace(',','').astype('float64')

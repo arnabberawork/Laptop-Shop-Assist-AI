@@ -319,38 +319,56 @@ def intent_confirmation_layer(response_assistant):
     """
     delimiter = "####"
 
-    allowed_values = {'low','medium','high'}
-
+    allowed_values = {"low","medium","high"}
     system_message = f"""
-    You are a senior evaluator who has an eye for detail.The input text will contain a user requirement captured through 6 keys.
-    You are provided an input. You need to evaluate step by step if the input text has the following keys:
-    {{
-    'GPU intensity': 'values',
-    'Display quality':'values',
-    'Portability':'values',
-    'Multitasking':'values',
-    'Processing speed':'values',
-    'Budget':'number'
-    }}
-    {delimiter} 
-    Step by step , check the guidelines for 'Budget':
-        1. Extract 'Budget' as a numerical value, even if it contains currency symbols or words.
-        2. Remove spaces, tabs, commas, and any non-numeric characters like currency symbols or words.
-        3. Convert the cleaned number into an integer or float. 
-        4. Ensure that 'Budget' is greater than or equal to 25000. Default currency is INR. If not, return "There are no laptops in that price range below 25000 INR".
-    {delimiter} 
-    Guidelines for other keys:
-    - The values for 'GPU intensity', 'Display quality', 'Portability', 'Multitasking', 'Processing speed' are from {allowed_values}.
-    {delimiter}
-    Thought 1 - Output a string 'Yes' if the values are correctly captured for all keys.
-    Thought 2 - If the answer is No, mention the reason in the key 'reason'.
-    {delimiter}
-    Only output a one-word string in JSON format at the key 'result' - Yes/No. 
-    """
+        You are a senior evaluator who has an eye for detail. The input text will contain a user requirement captured through 6 keys.
+        You are provided an input. You need to evaluate step by step if the input text has the following keys:
+        {{
+        "GPU intensity" : "values",
+        "Display quality" : "values",
+        "Portability" : "values",
+        "Multitasking" : "values",
+        "Processing speed" : "values",
+        "Budget" : "number"
+        }}
+        You need to evaluate the input step by step to ensure it adheres to the following criteria:
+        
+        {delimiter} 
+        Step 1 - Budget:
+        1. Extract the value of 'Budget' from the input text.
+        2. If the budget contains non-numeric characters (e.g., currency symbols, spaces, commas, or words), clean it by:
+        - Removing all non-numeric characters, such as ₹, $, commas, spaces, or text like 'INR' or 'USD'.
+        - Converting the cleaned number into a numerical format (integer or float).
+        3. Validate the numerical value:
+        - Ensure the budget is greater than or equal to 25000 (default currency is INR).
+        - If the budget is less than 25000, return: "There are no laptops in that price range below 25000 INR."
+        4. If the budget is valid, proceed to the next step.
+        
+        {delimiter}
+        Step 2 - 'GPU intensity', 'Display quality', 'Portability' :
+        - The keys 'GPU intensity', 'Display quality', 'Portability' must have values from this set: {allowed_values}.
+        - Ensure case-insensitive matching for these values (e.g., 'Low', 'low', 'LOW' are all valid).
+        - If any value is outside this set, output: `{{"result": "No", "reason": "The values for <key> are outside the allowed set."}}`.
+
+        {delimiter}
+        Step 3 - 'Multitasking', and 'Processing speed' :
+        - The keys 'Multitasking', and 'Processing speed' must have values from this set: {allowed_values}.
+        - Ensure case-insensitive matching for these values (e.g., 'Low', 'low', 'LOW' are all valid).
+        - If any value is outside this set, output: `{{"result": "No", "reason": "The values for <key> are outside the allowed set."}}`.
+        
+        {delimiter} 
+        Output Rules:
+        1. If all keys are valid and the budget is >= 25000, output: `{{"result": "Yes"}}`.
+        2. If any key is invalid or the budget is less than 25000, output: 
+        - `{{"result": "No", "reason": "<explanation>"}}`.
+        {delimiter}
+        Only output a one-word string ('Yes' or 'No') at the key 'result' in JSON format, with an optional 'reason' if the result is 'No'.
+        """
+    
     model="gpt-4o-mini"
     messages=[
         { "role" : "system", "content" : system_message },
-        { "role" : "user", "content" : response_assistant }
+        { "role" : "user", "content" : f"""Here is the input: {response_assistant}"""  }
     ]
     chat_completion_json=openai.chat.completions.create(
         model=model,
@@ -368,6 +386,7 @@ def intent_confirmation_layer(response_assistant):
         print("Error decoding JSON:",e)
 
     return json_output
+        
     
 
 def initialize_conv_reco(products):

@@ -45,7 +45,9 @@ def dialogue_mgmt_system():
                 break
 
 
-            confirmation = intent_confirmation_layer(response_assistant)
+            print(f"Input of intent confirmation : {response_assistant}")
+            response_tool = get_chat_completions_tool(response_assistant,func_name=shopassist_custom_functions)
+            confirmation = intent_confirmation_layer(response_tool)
 
             print("Intent Confirmation Yes/No:",confirmation.get('result'))
 

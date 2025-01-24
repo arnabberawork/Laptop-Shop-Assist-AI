@@ -72,6 +72,7 @@ Laptop-Shop-Assist-AI is an intelligent chatbot designed to assist users in find
 - **`POST /api/end_conversation`**: Ends the current conversation.
 
 ## Project Structure
+```
 Laptop-Shop-Assist-AI/
 ├── Git_Repo/
 │   ├── __pycache__/
@@ -96,6 +97,7 @@ Laptop-Shop-Assist-AI/
 │   ├── templates/
 │   │   ├── laptop-shop-assistant.html
 │   └── utils.py
+```
 
 
 ## Contributing

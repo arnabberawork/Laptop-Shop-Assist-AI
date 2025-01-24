@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop Shop Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a237e;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .chat-container {
+            height: 400px; /* Increased height */
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #fafafa;
+            font-size: 14px; /* Reduced font size */
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 12px;
+            max-width: 80%;
+        }
+
+        .bot-message {
+            text-align: left;
+            background-color: #e8eaf6; /* Light blue */
+            color: #1a237e; /* Deep blue text */
+            margin-right: auto;
+        }
+
+        .user-message {
+            text-align: right;
+            background-color: #c8e6c9; /* Light green background */
+            color: #2e7d32; /* Dark green text */
+            margin-left: auto;
+            margin-right: 0;
+            align-self: flex-end;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 50px);
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .submit-btn {
+            background-color: #0288d1;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .submit-btn:hover {
+            background-color: #0277bd;
+        }
+
+        .submit-btn:focus {
+            outline: none;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 48%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        button:hover:enabled {
+            background-color: #1b5e20;
+        }
+
+        #startButton {
+            background-color: #43a047;
+            color: #fff;
+        }
+
+        #endButton {
+            background-color: #e53935;
+            color: #fff;
+        }
+
+        #endButton:disabled {
+            background-color: #ccc;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- Marked.js for Markdown support -->
+</head>
+<body>
+    <div class="container">
+        <h1>Laptop Shop Assistant</h1>
+
+        <!-- Chat Container -->
+        <div class="chat-container" id="chatContainer">
+            <!-- Conversation history will appear here -->
+        </div>
+
+        <!-- Input Container -->
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Type your message here...">
+            <button class="submit-btn" onclick="submitMessage()">
+                <i class="fas fa-paper-plane"></i> <!-- Font Awesome paper-plane icon -->
+            </button>
+        </div>
+
+        <!-- Button Container (Start & End Conversation) -->
+        <div class="button-container">
+            <button id="startButton" onclick="startConversation()">Start Conversation</button>
+            <button id="endButton" onclick="endConversation()" disabled>End Conversation</button>
+        </div>
+    </div>
+
+    <script>
+        async function startConversation() {
+            const startButton = document.getElementById('startButton');
+            const endButton = document.getElementById('endButton');
+
+            // Disable the Start button and enable the End button
+            startButton.disabled = true;
+            endButton.disabled = false;
+
+            try {
+                const response = await fetch('/api/start_conversation', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const responseJson = await response.json();
+                const chatContainer = document.getElementById('chatContainer');
+
+                // Display bot's introduction message
+                const introductionMessage = document.createElement('div');
+                introductionMessage.classList.add('message', 'bot-message');
+                introductionMessage.innerHTML = marked.parse(responseJson.introduction); // Parse Markdown to HTML
+                chatContainer.appendChild(introductionMessage);
+
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to start the conversation. Please try again.');
+            }
+        }
+
+        async function submitMessage() {
+            const userInput = document.getElementById('userInput').value.trim();
+            const chatContainer = document.getElementById('chatContainer');
+
+            if (userInput) {
+                // Display user's message
+                const userMessage = document.createElement('div');
+                userMessage.classList.add('message', 'user-message');
+                userMessage.textContent = userInput;
+                chatContainer.appendChild(userMessage);
+
+                try {
+                    const response = await fetch('/api/process_input', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ message: userInput })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+
+                    const responseJson = await response.json();
+
+                    // Display bot's response
+                    const botMessage = document.createElement('div');
+                    botMessage.classList.add('message', 'bot-message');
+                    botMessage.innerHTML = marked.parse(responseJson.response); // Parse Markdown to HTML
+                    chatContainer.appendChild(botMessage);
+
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                    document.getElementById('userInput').value = '';
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Failed to send the message. Please try again.');
+                }
+            }
+        }
+
+        async function endConversation() {
+            const startButton = document.getElementById('startButton');
+            const endButton = document.getElementById('endButton');
+            const chatContainer = document.getElementById('chatContainer');
+
+            try {
+                // Send a request to end the conversation
+                const response = await fetch('/api/end_conversation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                // Check if the response is successful
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Response from server:', data);
+
+                if (data.status === 'conversation ended') {
+                    alert("Conversation ended, session cleared.");
+                } else {
+                    console.warn('Unexpected response from server:', data);
+                    alert('Conversation ended, but with unexpected server response.');
+                }
+            } catch (error) {
+                console.error('Error during conversation end:', error);
+                alert('Failed to end the conversation. Please try again.');
+            }
+
+            // Clear the UI and reset buttons
+            console.log("Clearing chat UI elements...");
+            chatContainer.innerHTML = '';
+            document.getElementById('userInput').value = '';
+            endButton.disabled = true;
+            startButton.disabled = false;
+            console.log("UI elements cleared, and buttons reset.");
+        }
+
+    </script>
+</body>
+</html>

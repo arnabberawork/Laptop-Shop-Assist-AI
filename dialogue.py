@@ -2,6 +2,75 @@ from openai_api import initialize_conversation, get_chat_completions, get_chat_c
 from utils import compare_laptops_with_user, recommendation_validation
 from schema.shopassist_schema import shopassist_custom_functions
 from IPython.display import display
+import logging
+
+# Setup logger
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s - %(levelname)s - %(message)s',
+                    handlers=[
+                        logging.StreamHandler(),
+                        logging.FileHandler('app.log', encoding='utf-8', mode='a')  # Logs to app.log file
+                    ])
+logger = logging.getLogger(__name__)
+
+
+
+def initialize_conversation_system():
+    """
+    Initializes the conversation system and retrieves the assistant's introduction.
+    """
+    conversation = initialize_conversation()
+    introduction = get_chat_completions(conversation)
+    return conversation, introduction
+
+
+def handle_moderation_check(input_text):
+    """
+    Checks if the input text is flagged by the moderation system.
+    """
+    moderation = moderation_check(input_text)
+    if moderation == 'Flagged':
+        return False
+    return True
+
+
+def process_user_input(conversation, user_input):
+    """
+    Processes user input and updates the conversation.
+    """
+    conversation.append({"role": "user", "content": user_input})
+    response_assistant = get_chat_completions(conversation)
+    return response_assistant
+
+
+def confirm_intent(response_tool):
+    """
+    Confirms the user's intent based on the response tool's output.
+    """
+    confirmation = intent_confirmation_layer(response_tool)
+    return confirmation.get('result')
+
+
+def fetch_recommendations(conversation_reco, response_tool):
+    """
+    Fetches laptop recommendations and updates the conversation.
+    """
+    logger.info("dialogue_info 1 - Fetching laptop recommendations. Response: %s and Type: %s", conversation_reco, type(conversation_reco))
+    response = get_chat_completions_tool(response_tool, func_name=shopassist_custom_functions)
+    logger.info("dialogue_info 2 - Fetching laptop recommendations. Response: %s and Type: %s", response, type(response))
+    top_3_laptops = compare_laptops_with_user(response)
+    validated_reco = recommendation_validation(top_3_laptops)
+    conversation_reco = initialize_conv_reco(validated_reco)
+    return top_3_laptops, conversation_reco
+
+
+def generate_recommendation(conversation_reco, user_profile):
+    """
+    Generates recommendations based on the validated laptop list.
+    """
+    conversation_reco.append({"role": "user", "content": "This is my user profile" + str(user_profile)})
+    recommendation = get_chat_completions(conversation_reco)
+    return recommendation
 
 
 def dialogue_mgmt_system():
@@ -99,4 +168,5 @@ def dialogue_mgmt_system():
 
 
 if __name__ == "__main__":
-    dialogue_mgmt_system()
+    conversation = dialogue_mgmt_system()
+    print(conversation)

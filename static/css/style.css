@@ -1,0 +1,41 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    background-color: rgb(42, 37, 33);
+}
+
+h1 {
+    color: limegreen;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.container {
+    text-align: center;
+}

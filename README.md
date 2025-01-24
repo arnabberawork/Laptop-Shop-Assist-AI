@@ -78,24 +78,25 @@ Laptop-Shop-Assist-AI/
 │   ├── .env
 │   ├── .gitignore
 │   ├── .ipynb_checkpoints/
-│   ├── [app.log](http://_vscodecontentref_/2)
-│   ├── [app.py](http://_vscodecontentref_/3)
-│   ├── [chatbot_page.py](http://_vscodecontentref_/4)
+│   ├── app.log
+│   ├── app.py
+│   ├── chatbot_page.py
 │   ├── data/
 │   │   ├── updated_laptop.csv
 │   ├── design/
-│   ├── [dialogue.py](http://_vscodecontentref_/5)
+│   ├── dialogue.py
 │   ├── notebooks/
 │   │   ├── ShopAssistAI-2.0.ipynb
-│   ├── [openai_api.py](http://_vscodecontentref_/6)
-│   ├── [README.md](http://_vscodecontentref_/7)
-│   ├── [requirements.txt](http://_vscodecontentref_/8)
+│   ├── openai_api.py
+│   ├── README.md
+│   ├── requirements.txt
 │   ├── schema/
 │   │   ├── config.py
 │   ├── static/
 │   ├── templates/
 │   │   ├── laptop-shop-assistant.html
-│   └── [utils.py](http://_vscodecontentref_/9)
+│   └── utils.py
+
 
 ## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request for any improvements or bug fixes.

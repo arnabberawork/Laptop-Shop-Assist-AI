@@ -108,12 +108,7 @@ Laptop-Shop-Assist-AI addresses this challenge by offering an interactive chatbo
 
 ## Project Structure
 ```plaintext
-Laptop-Shop-Assist-AI/
-├── Git_Repo/
-│   ├── __pycache__/
-│   ├── .env
-│   ├── .gitignore
-│   ├── .ipynb_checkpoints/
+├── Laptop-Shop-Assist-AI/
 │   ├── app.log
 │   ├── app.py
 │   ├── data/
@@ -128,6 +123,8 @@ Laptop-Shop-Assist-AI/
 │   ├── schema/
 │   │   ├── config.py
 │   ├── static/
+│   │   ├── css/
+│   │   |  ├── styles.css
 │   ├── templates/
 │   │   ├── laptop-shop-assistant.html
 │   └── utils.py

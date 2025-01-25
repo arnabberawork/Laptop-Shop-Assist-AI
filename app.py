@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.DEBUG,
                     ])
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder='static')
 #app.config.from_object(Config)
 
 # Secret key for session management (use a secure key in production)

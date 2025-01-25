@@ -1,4 +1,5 @@
 # Laptop-Shop-Assist-AI
+Your AI-Powered Laptop Shopping Assistant
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -12,8 +13,8 @@
 9. [API Endpoints](#api-endpoints)
 10. [Project Structure](#project-structure)
 11. [Conclusions](#conclusions)
-12. [Acknowledgements](#acknowledgements)
-13. [Glossary](#glossary)
+12. [Glossary](#glossary)
+13. [Acknowledgements](#acknowledgements)
 14. [Contributing](#contributing)
 15. [License](#license)
 16. [Author](#author)
@@ -47,13 +48,11 @@ Laptop-Shop-Assist-AI addresses this challenge by offering an interactive chatbo
 ## Technologies/Libraries Used
 - Python 3.11 or higher
 - Flask
-- Streamlit
 - OpenAI GPT API
 - Pandas
-- Scikit-learn
-- NLTK
-- SpaCy
-- Matplotlib
+- HTML
+- CSS
+- Javascript
 
 ## Installation
 ### Prerequisites
@@ -102,6 +101,14 @@ Laptop-Shop-Assist-AI addresses this challenge by offering an interactive chatbo
 
 2. Open your web browser and navigate to the URL provided by Streamlit.
 
+### Running the Frontend Application
+1. Ensure the Flask server is running:
+    ```sh
+    python app.py
+    ```
+
+2. Open your web browser and navigate to `http://127.0.0.1:5000` to access the frontend built with HTML, CSS, and JavaScript.
+
 ## API Endpoints
 - **`GET /api/start_conversation`**: Initializes a new conversation.
 - **`POST /api/process_input`**: Processes user input and returns the assistant's response.
@@ -117,7 +124,6 @@ Laptop-Shop-Assist-AI/
 │   ├── .ipynb_checkpoints/
 │   ├── app.log
 │   ├── app.py
-│   ├── chatbot_page.py
 │   ├── data/
 │   │   ├── updated_laptop.csv
 │   ├── design/
@@ -134,18 +140,32 @@ Laptop-Shop-Assist-AI/
 │   │   ├── laptop-shop-assistant.html
 │   └── utils.py
 ```
-## Contributing
-Contributions are welcome! Please fork the repository and submit a pull request for any improvements or bug fixes.
+
+## Conclusions
+Laptop-Shop-Assist-AI successfully bridges the gap between customers and the overwhelming variety of laptops in the market. It simplifies the buying process by offering an intuitive chatbot and personalized recommendations, ensuring a better customer experience.
+
+## Glossary
+- **AI (Artificial Intelligence)**: The simulation of human intelligence in machines that are programmed to think and learn.
+- **API (Application Programming Interface)**: A set of rules that allows different software entities to communicate with each other.
+- **Chatbot**: A software application used to conduct an online chat conversation via text or text-to-speech.
+- **Flask**: A micro web framework written in Python.
+- **GPT (Generative Pre-trained Transformer)**: A type of language model developed by OpenAI that uses deep learning to produce human-like text.
+- **Virtual Environment**: An isolated environment in Python where you can install packages and dependencies for a specific project without affecting other projects.
+- **HTML (HyperText Markup Language)**: The standard markup language for documents designed to be displayed in a web browser.
+- **CSS (Cascading Style Sheets)**: A style sheet language used for describing the presentation of a document written in HTML or XML.
+- **JavaScript**: A programming language commonly used to create interactive effects within web browsers.
 
 ## Acknowledgements
+- The project references course materials from upGrad's curriculum.
+- The project references presentations in upGrad's module given by [Kshitij Jain](https://www.linkedin.com/in/kshitij-jain-8554472b/?originalSubdomain=in).
+- The project references presentations in upGrad's live class given by [Sheshanth AS](https://www.linkedin.com/in/sheshanthas/).
+- The project references insights and inferences from presentations in upGrad's live class given by [Shridhar Galande](https://www.linkedin.com/in/shridhar-galande/).
 
-- The project reference course materieals from upGrads curriculm .
-- The project references from presentation in upGrads module given by [Alankar Gupta](https://www.linkedin.com/in/alankar-gupta-898a9659/)
-- The project references insights and inferences from presentation in upGrads live class given by [Dr. Apurva Kulkarni] (https://www.linkedin.com/in/dr-apurva-kulkarni-33a074189/)
-- The project references from presentation in upGrads live class given by [Amit Pandey](https://www.linkedin.com/in/amitpandeyprofile/)
+## Contributing
+Contributions are welcome! Please fork the repository and submit a pull request for any improvements or bug fixes.
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Author
-* [Arnab Bera]( https://www.linkedin.com/in/arnabbera-tech/ )
+* [Arnab Bera](https://www.linkedin.com/in/arnabbera-tech/)

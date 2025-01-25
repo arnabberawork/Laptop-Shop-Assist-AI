@@ -93,14 +93,6 @@ Laptop-Shop-Assist-AI addresses this challenge by offering an interactive chatbo
 
 2. Open your web browser and navigate to `http://127.0.0.1:5000`.
 
-### Running the Streamlit Application
-1. Start the Streamlit app:
-    ```sh
-    streamlit run chatbot_page.py
-    ```
-
-2. Open your web browser and navigate to the URL provided by Streamlit.
-
 ### Running the Frontend Application
 1. Ensure the Flask server is running:
     ```sh

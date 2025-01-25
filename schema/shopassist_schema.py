@@ -1,7 +1,7 @@
 # `shopassist_custom_functions` - OpenAI Function Calling Configuration
 '''
 This code defines a custom function for leveraging OpenAI's function calling feature.
-The function, named 'extract_laptop_preferences', is designed to extract structured information from user input 
+The function, named 'extract_user_info', is designed to extract structured information from user input 
 regarding their laptop preferences to guide personalized recommendations.
 
 The 'parameters' section defines the expected input structure, which includes the following keys:

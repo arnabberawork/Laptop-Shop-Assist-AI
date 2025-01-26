@@ -135,8 +135,7 @@ Laptop-Shop-Assist-AI addresses this challenge by offering an interactive chatbo
 ## Demonstration
 You can view the [demo materials](https://github.com/arnabberawork/Laptop-Shop-Assist-AI/tree/main/demo)
 - [Video](https://github.com/arnabberawork/Laptop-Shop-Assist-AI/blob/main/demo/shopAssistAIVideo.mp4)
-- [PPT](https://github.com/arnabberawork/Laptop-Shop-Assist-AI/blob/main/demo/Laptop_Shop_Assist_AI.pdf)
-- [Presentation](https://github.com/arnabberawork/Laptop-Shop-Assist-AI/blob/main/demo/Laptop_Shop_Assist_AI.pptx)
+- [PDF](https://github.com/arnabberawork/Laptop-Shop-Assist-AI/blob/main/demo/Laptop_Shop_Assist_AI.pdf)
 
 ## Conclusions
 Laptop-Shop-Assist-AI successfully bridges the gap between customers and the overwhelming variety of laptops in the market. It simplifies the buying process by offering an intuitive chatbot and personalized recommendations, ensuring a better customer experience.

@@ -12,12 +12,13 @@ Your AI-Powered Laptop Shopping Assistant
 8. [Usage](#usage)
 9. [API Endpoints](#api-endpoints)
 10. [Project Structure](#project-structure)
-11. [Conclusions](#conclusions)
-12. [Glossary](#glossary)
-13. [Acknowledgements](#acknowledgements)
-14. [Contributing](#contributing)
-15. [License](#license)
-16. [Author](#author)
+11. [Demonstration](#demonstration)
+12. [Conclusions](#conclusions)
+13. [Glossary](#glossary)
+14. [Acknowledgements](#acknowledgements)
+15. [Contributing](#contributing)
+16. [License](#license)
+17. [Author](#author)
 
 ## Introduction
 Laptop-Shop-Assist-AI is an intelligent chatbot designed to assist users in finding the best laptop based on their needs. It leverages OpenAI's GPT models to interact with users, gather their requirements, and provide personalized laptop recommendations.
@@ -116,6 +117,7 @@ Laptop-Shop-Assist-AI addresses this challenge by offering an interactive chatbo
 │   ├── design/
 │   ├── dialogue.py
 │   ├── notebooks/
+│   │   ├── ShopAssistAI.ipynb
 │   │   ├── ShopAssistAI-2.0.ipynb
 │   ├── openai_api.py
 │   ├── README.md
@@ -129,6 +131,11 @@ Laptop-Shop-Assist-AI addresses this challenge by offering an interactive chatbo
 │   │   ├── laptop-shop-assistant.html
 │   └── utils.py
 ```
+
+## Demonstration
+You can view the [demo materials](https://github.com/arnabberawork/Laptop-Shop-Assist-AI/tree/main/demo)
+- [Video](https://github.com/arnabberawork/Laptop-Shop-Assist-AI/blob/main/demo/shopAssistAIVideo.mp4)
+- [Presentation](https://github.com/arnabberawork/Laptop-Shop-Assist-AI/blob/main/demo/Laptop_Shop_Assist_AI.pptx)
 
 ## Conclusions
 Laptop-Shop-Assist-AI successfully bridges the gap between customers and the overwhelming variety of laptops in the market. It simplifies the buying process by offering an intuitive chatbot and personalized recommendations, ensuring a better customer experience.

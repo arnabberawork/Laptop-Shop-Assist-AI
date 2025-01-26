@@ -135,6 +135,7 @@ Laptop-Shop-Assist-AI addresses this challenge by offering an interactive chatbo
 ## Demonstration
 You can view the [demo materials](https://github.com/arnabberawork/Laptop-Shop-Assist-AI/tree/main/demo)
 - [Video](https://github.com/arnabberawork/Laptop-Shop-Assist-AI/blob/main/demo/shopAssistAIVideo.mp4)
+- [PPT](https://github.com/arnabberawork/Laptop-Shop-Assist-AI/blob/main/demo/Laptop_Shop_Assist_AI.pdf)
 - [Presentation](https://github.com/arnabberawork/Laptop-Shop-Assist-AI/blob/main/demo/Laptop_Shop_Assist_AI.pptx)
 
 ## Conclusions
